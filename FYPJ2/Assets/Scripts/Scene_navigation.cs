@@ -17,4 +17,9 @@ public class Scene_navigation : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void GoTo_MainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 }

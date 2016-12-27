@@ -7,6 +7,7 @@ public class Player_input : MonoBehaviour
 {
     public Text txt_required;
     public Text txt_filled;
+    public Image monster_;
     int char_index;
     char[] char_required;
 
@@ -44,6 +45,7 @@ public class Player_input : MonoBehaviour
             if(txt_required.text == txt_filled.text)
             {
                 //successful , change monster, drop gold..etc
+                GameControl._control._monsterCount++; //make sure that when the _monsterCount reaches 10, set next monster to BOSS.
             }
             else
             {
