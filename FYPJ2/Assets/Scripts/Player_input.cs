@@ -11,6 +11,8 @@ public class Player_input : MonoBehaviour
     int char_index;
     char[] char_required;
 
+    public Sprite[] sprt_list;
+
     // Use this for initialization
     void Start()
     {
@@ -37,6 +39,10 @@ public class Player_input : MonoBehaviour
                     txt_filled.text += crntChar;
                     char_index++;
                 }
+                else
+                {
+                    //negative feedback
+                }
             }
         }
 
@@ -45,18 +51,16 @@ public class Player_input : MonoBehaviour
             if(txt_required.text == txt_filled.text)
             {
                 //successful , change monster, drop gold..etc
-                GameControl._control._monsterCount++; //make sure that when the _monsterCount reaches 10, set next monster to BOSS.
+                //GameControl._control._monsterCount++; //make sure that when the _monsterCount reaches 10, set next monster to BOSS.
+                Debug.Log("monster killed");
+                monster_.GetComponent<Image>().sprite = sprt_list[0];
+                //change word required
             }
             else
             {
                 txt_filled.text = "";
                 char_index = 0;
             }
-        }
-        if(Input.GetKeyDown(KeyCode.Backspace))
-        {
-            txt_filled.text = txt_filled.text.Remove(txt_filled.text.Length - 1);
-            char_index--;
         }
     }
 
