@@ -30,9 +30,10 @@ public class GameControl : MonoBehaviour {
 
     }
 
-    public float _money;
     public float _monsterCount;
-    public string[] _words;
+    public string[] _words_m;
+    public string[] _words_b;
+    public int _level;
 
     string _filePath = "/playerData.dat";
     public void Save()
@@ -44,13 +45,33 @@ public class GameControl : MonoBehaviour {
         playerData data = new playerData();
         {
             data.monsterCount = _monsterCount;
-            data.words = _words;
+            data.words_m = _words_m;
+            data.words_b = _words_b;
+            data.level = _level;
         }
 
         //writing it to that file path
         bf_writer.Serialize(_file, data);
 
         _file.Close();
+    }
+
+    public void ForceLoad()
+    {
+        //if file exsists
+        if (File.Exists(Application.persistentDataPath + _filePath))
+        {
+            BinaryFormatter bf_reader = new BinaryFormatter();
+            FileStream _file = File.Open(Application.persistentDataPath + _filePath, FileMode.Open);
+
+            playerData data = (playerData)bf_reader.Deserialize(_file);
+            _file.Close();
+
+            _monsterCount = data.monsterCount;
+            _words_m = data.words_m;
+            _words_b = data.words_b;
+            _level = data.level;
+        }
     }
 
     public bool Load()
@@ -65,14 +86,27 @@ public class GameControl : MonoBehaviour {
             _file.Close();
 
             _monsterCount = data.monsterCount;
-            _words = data.words;
-            return true;
+            _words_m = data.words_m;
+            _level = data.level;
         }
-        else
+        else //on first load (no previous save, create a save)
         {
-            Debug.Log("File doesnt exsist at: " + Application.persistentDataPath + _filePath);
-            return true;
+            //set variables 
+            _monsterCount = 0;
+            _level = 1;
+            {
+                _words_m = new string[3];
+                _words_m[0] = "HELLO";
+                _words_m[1] = "TESTING";
+                _words_m[2] = "GOODBYE";
+            }
+            {
+                _words_b = new string[1];
+                _words_b[0] = "hippopotamus";
+            }
+            Save();
         }
+        return true;
     }
 }
 
@@ -80,6 +114,12 @@ public class GameControl : MonoBehaviour {
 [Serializable]
 class playerData
 {
+    //how many monsters left to boss
     public float monsterCount;
-    public string[] words;
+    //the string of words for this stage. - remember to reload everytime you clear stage.
+    public string[] words_m;
+    // the words for the bosses.
+    public string[] words_b;
+    //the current stage
+    public int level;
 }
