@@ -1,33 +1,31 @@
 ﻿/*
- *  This file is a data store of the game, use this to store data of different type 
- *  Remember to call save and load when needed. 
+ *  This file is a data store of the game, use this to store data of different type
+ *  Remember to call save and load when needed.
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
-public class GameControl : MonoBehaviour {
-
+public class GameControl : MonoBehaviour
+{
     public static GameControl _control;
 
-    void Awake () {
+    private void Awake()
+    {
         //making it singleton object
-        if(_control == null)
+        if (_control == null)
         {
             //make object persistant, so wont destroy at all
             DontDestroyOnLoad(gameObject);
 
             _control = this;
         }
-        else if(_control != this) //make sure there are no duplicates, if have destroy the latter
+        else if (_control != this) //make sure there are no duplicates, if have destroy the latter
         {
             Destroy(gameObject);
         }
-
     }
 
     public float _monsterCount;
@@ -35,7 +33,8 @@ public class GameControl : MonoBehaviour {
     public string[] _words_b;
     public int _level;
 
-    string _filePath = "/playerData.dat";
+    private string _filePath = "/playerData.dat";
+
     public void Save()
     {
         BinaryFormatter bf_writer = new BinaryFormatter();
@@ -91,7 +90,7 @@ public class GameControl : MonoBehaviour {
         }
         else //on first load (no previous save, create a save)
         {
-            //set variables 
+            //set variables
             _monsterCount = 0;
             _level = 1;
             {
@@ -112,14 +111,17 @@ public class GameControl : MonoBehaviour {
 
 //makes the below class able to save to file
 [Serializable]
-class playerData
+internal class playerData
 {
     //how many monsters left to boss
     public float monsterCount;
+
     //the string of words for this stage. - remember to reload everytime you clear stage.
     public string[] words_m;
+
     // the words for the bosses.
     public string[] words_b;
+
     //the current stage
     public int level;
 }

@@ -1,26 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Player_input : MonoBehaviour
 {
     // The string of char required to be filled in - in black
     public Text txt_required;
+
     // The correctly inputed string of char - in white
     public Text txt_filled;
+
     // The current monster being dissplayed
     public Image monster_;
-    int char_index;
-    char[] char_required;
+
+    private int char_index;
+    private char[] char_required;
 
     //the sprite images of the Boss monsters
     public Sprite[] spriteArr_boss;
-    //the sprite images of monsters 
+
+    //the sprite images of monsters
     public Sprite[] spriteArr_monster;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         //setting the required text into char array for easier checking
         char_required = txt_required.text.ToCharArray();
@@ -29,27 +31,27 @@ public class Player_input : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //if the word has changed , update the checking sequence.
-        if(char_required != txt_required.text.ToCharArray() )
+        if (char_required != txt_required.text.ToCharArray())
             char_required = txt_required.text.ToCharArray();
 
-        checkKey();    
+        checkKey();
     }
 
     //Trigger different feedback during runtime.
-    void checkKey()
+    private void checkKey()
     {
         //checking across all alphabet - will convert all to upper case (because keycode), NOTE: if got error - check that the required are all in CAPS
-        for(var i = KeyCode.A ; i < KeyCode.Z; i++)
+        for (var i = KeyCode.A; i < KeyCode.Z; i++)
         {
             if (Input.GetKeyDown(i))
             {
                 string crntChar = i.ToString();
                 if (crntChar == char_required[char_index].ToString().ToUpper())
                 {
-                    //if correct 
+                    //if correct
                     txt_filled.text += crntChar;
                     char_index++;
                 }
@@ -61,7 +63,7 @@ public class Player_input : MonoBehaviour
         }
 
         //when enter key is pressed
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             //check if correct
             if (txt_required.text == txt_filled.text)
@@ -85,6 +87,4 @@ public class Player_input : MonoBehaviour
             }
         }
     }
-
-
 }

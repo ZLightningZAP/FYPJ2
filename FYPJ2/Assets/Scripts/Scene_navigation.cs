@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Scene_navigation : MonoBehaviour {
-
-	public void GoTo_Settings()
+public class Scene_navigation : MonoBehaviour
+{
+    public void GoTo_Settings()
     {
         SceneManager.LoadScene("Settings");
     }
@@ -12,7 +12,7 @@ public class Scene_navigation : MonoBehaviour {
     {
         SceneManager.LoadScene("Gameplay");
     }
-    
+
     public void GoTo_Exit()
     {
         Application.Quit();
@@ -21,5 +21,10 @@ public class Scene_navigation : MonoBehaviour {
     public void GoTo_MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void GoTo_Credits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 }
