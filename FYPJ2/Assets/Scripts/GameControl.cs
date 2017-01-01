@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -11,6 +12,8 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
     public static GameControl _control;
+    public static List<string> MobWords = new List<string>();
+    public static List<string> BossWords = new List<string>();
 
     private void Awake()
     {
@@ -94,14 +97,40 @@ public class GameControl : MonoBehaviour
             _monsterCount = 0;
             _level = 1;
             {
-                _words_m = new string[3];
-                _words_m[0] = "HELLO";
-                _words_m[1] = "TESTING";
-                _words_m[2] = "GOODBYE";
+                //**READ THE WORDS TEXT FILE**
+                //Clean the array before loading again
+                MobWords.Clear();
+                StreamReader reader = new StreamReader(Application.streamingAssetsPath + "/NormalWords.txt");
+                while (!reader.EndOfStream)
+                {
+                    MobWords.Add(reader.ReadLine());
+                }
+                //Close the reader
+                reader.Close();
+
+                _words_m = new string[MobWords.Count];
+                for (int i = 0; i < MobWords.Count; ++i)
+                {
+                    _words_m[i] = MobWords[i];
+                }
             }
             {
-                _words_b = new string[1];
-                _words_b[0] = "hippopotamus";
+                //**READ THE WORDS TEXT FILE**
+                //Clean the array before loading again
+                BossWords.Clear();
+                StreamReader reader1 = new StreamReader(Application.streamingAssetsPath + "/BossWords.txt");
+                while (!reader1.EndOfStream)
+                {
+                    BossWords.Add(reader1.ReadLine());
+                }
+                //Close the reader
+                reader1.Close();
+
+                _words_b = new string[BossWords.Count];
+                for (int i = 0; i < BossWords.Count; ++i)
+                {
+                    _words_b[i] = BossWords[i];
+                }
             }
             Save();
         }
