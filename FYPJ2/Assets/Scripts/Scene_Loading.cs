@@ -14,7 +14,6 @@ public class Scene_Loading : MonoBehaviour
             //set variables
             GameControl._control._monsterCount = 0;
             GameControl._control._level = 1;
-
             GameControl._control._s_BGM = 1;
             GameControl._control._s_SFX = 1;
             GameControl._control.Save();

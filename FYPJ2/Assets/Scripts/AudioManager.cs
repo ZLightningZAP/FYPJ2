@@ -95,6 +95,11 @@ public class AudioManager : MonoBehaviour
             sfxList[i] = go.AddComponent<AudioSource>();
             sfxList[i].clip = SoundEffectsToLoad[i];
         }
+
+        //Plays the background music
+        AudioManager.PlayBackgroundMusic(AudioManager.BackgroundMusic.MainMenu);
+        AudioManager.SetBGMVolume(GameControl._control._s_BGM);
+        AudioManager.SetEffectVolume(GameControl._control._s_SFX);
     }
 
     // Update is called once per frame

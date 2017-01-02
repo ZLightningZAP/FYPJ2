@@ -83,9 +83,6 @@ public class GameControl : MonoBehaviour
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
 
-            //Assign the values to the AudioManager
-            AudioManager.SetBGMVolume(_s_BGM);
-            AudioManager.SetEffectVolume(_s_SFX);
             {
                 //**READ THE WORDS TEXT FILE**
                 //Clean the array before loading again
@@ -142,9 +139,6 @@ public class GameControl : MonoBehaviour
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
 
-            //Assign the values to the AudioManager
-            AudioManager.SetBGMVolume(_s_BGM);
-            AudioManager.SetEffectVolume(_s_SFX);
             {
                 //**READ THE WORDS TEXT FILE**
                 //Clean the array before loading again

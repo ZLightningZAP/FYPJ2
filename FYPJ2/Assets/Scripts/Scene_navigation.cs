@@ -21,8 +21,6 @@ public class Scene_navigation : MonoBehaviour
     public void GoTo_MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
-        //Plays the background music
-        AudioManager.PlayBackgroundMusic(AudioManager.BackgroundMusic.MainMenu);
     }
 
     public void GoTo_Credits()
