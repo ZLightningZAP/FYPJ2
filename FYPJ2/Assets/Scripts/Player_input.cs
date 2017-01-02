@@ -79,7 +79,7 @@ public class Player_input : MonoBehaviour
 
                 //change word required
                 //**NOTE randomize word coming out
-                txt_required.text = GameControl._control._words_m[0];
+                txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount];
                 char_required = txt_required.text.ToCharArray();
 
                 txt_filled.text = "";
