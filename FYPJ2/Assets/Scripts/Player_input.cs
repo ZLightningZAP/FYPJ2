@@ -49,7 +49,7 @@ public class Player_input : MonoBehaviour
         //checking across all alphabet - will convert all to upper case (because keycode), NOTE: if got error - check that the required are all in CAPS
         for (var i = KeyCode.A; i < KeyCode.Z; i++)
         {
-            if (Input.GetKeyDown(i) && char_index < char_required.Length )
+            if (Input.GetKeyDown(i) && char_index < char_required.Length)
             {
                 string crntChar = i.ToString();
                 if (crntChar == char_required[char_index].ToString().ToUpper())
@@ -80,7 +80,7 @@ public class Player_input : MonoBehaviour
             else
             {
                 txt_filled.color = Color.red;
-                
+
                 //resets the color back to white after 0.2s
                 Invoke("ResetColor", 0.2f);
             }

@@ -29,4 +29,9 @@ public class Scene_navigation : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+
+    public void DEBUG_Saving()
+    {
+        GameControl._control.Save();
+    }
 }

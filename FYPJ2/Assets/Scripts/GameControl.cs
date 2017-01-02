@@ -12,6 +12,7 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
     public static GameControl _control;
+
     private void Awake()
     {
         //making it singleton object
@@ -28,8 +29,8 @@ public class GameControl : MonoBehaviour
         }
     }
 
-     /* =====  DO NOT PUT ANYTHING ABOVE THIS COMMENT. ==== */
-    
+    /* =====  DO NOT PUT ANYTHING ABOVE THIS COMMENT. ==== */
+
     public static List<string> MobWords = new List<string>();
     public static List<string> BossWords = new List<string>();
 
@@ -44,6 +45,8 @@ public class GameControl : MonoBehaviour
 
     public void Save()
     {
+        Debug.Log("saving");
+
         BinaryFormatter bf_writer = new BinaryFormatter();
         FileStream _file = File.Create(Application.persistentDataPath + _filePath);
 
