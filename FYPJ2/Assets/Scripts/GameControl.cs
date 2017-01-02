@@ -28,14 +28,17 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    /*
-     * DO NOT PUT ANYTHING ABOVE THIS COMMENT.
-     * Any variable must be declared after this line.
-    */
+     /* =====  DO NOT PUT ANYTHING ABOVE THIS COMMENT. ==== */
+    
+    public static List<string> MobWords = new List<string>();
+    public static List<string> BossWords = new List<string>();
+
     public int _monsterCount;
     public string[] _words_m;
     public string[] _words_b;
     public int _level;
+    public int _s_BGM;
+    public int _s_SFX;
 
     private string _filePath = "/playerData.dat";
 
@@ -48,9 +51,9 @@ public class GameControl : MonoBehaviour
         playerData data = new playerData();
         {
             data.monsterCount = _monsterCount;
-            data.words_m = _words_m;
-            data.words_b = _words_b;
             data.level = _level;
+            data.sound_BGM = _s_BGM;
+            data.sound_SFX = _s_SFX;
         }
 
         //writing it to that file path
@@ -71,9 +74,43 @@ public class GameControl : MonoBehaviour
             _file.Close();
 
             _monsterCount = data.monsterCount;
-            _words_m = data.words_m;
-            _words_b = data.words_b;
             _level = data.level;
+            _s_BGM = data.sound_BGM;
+            _s_SFX = data.sound_SFX;
+            {
+                //**READ THE WORDS TEXT FILE**
+                //Clean the array before loading again
+                MobWords.Clear();
+                StreamReader reader = new StreamReader(Application.streamingAssetsPath + "/NormalWords.txt");
+                while (!reader.EndOfStream)
+                {
+                    MobWords.Add(reader.ReadLine());
+                }
+                //Close the reader
+                reader.Close();
+
+                _words_m = new string[MobWords.Count];
+                for (int i = 0; i < MobWords.Count; ++i)
+                {
+                    _words_m[i] = MobWords[i].ToUpper();
+                }
+
+                //**READ THE WORDS TEXT FILE**
+                //Clean the array before loading again
+                BossWords.Clear();
+                StreamReader reader1 = new StreamReader(Application.streamingAssetsPath + "/BossWords.txt");
+                while (!reader1.EndOfStream)
+                {
+                    BossWords.Add(reader1.ReadLine());
+                }
+                //Close the reader
+                reader1.Close();
+                _words_b = new string[BossWords.Count];
+                for (int i = 0; i < BossWords.Count; ++i)
+                {
+                    _words_b[i] = BossWords[i].ToUpper();
+                }
+            }
         }
     }
 
@@ -92,9 +129,43 @@ public class GameControl : MonoBehaviour
             _file.Close();
 
             _monsterCount = data.monsterCount;
-            _words_m = data.words_m;
-            _words_b = data.words_b;
             _level = data.level;
+            _s_BGM = data.sound_BGM;
+            _s_SFX = data.sound_SFX;
+            {
+                //**READ THE WORDS TEXT FILE**
+                //Clean the array before loading again
+                MobWords.Clear();
+                StreamReader reader = new StreamReader(Application.streamingAssetsPath + "/NormalWords.txt");
+                while (!reader.EndOfStream)
+                {
+                    MobWords.Add(reader.ReadLine());
+                }
+                //Close the reader
+                reader.Close();
+
+                _words_m = new string[MobWords.Count];
+                for (int i = 0; i < MobWords.Count; ++i)
+                {
+                    _words_m[i] = MobWords[i].ToUpper();
+                }
+
+                //**READ THE WORDS TEXT FILE**
+                //Clean the array before loading again
+                BossWords.Clear();
+                StreamReader reader1 = new StreamReader(Application.streamingAssetsPath + "/BossWords.txt");
+                while (!reader1.EndOfStream)
+                {
+                    BossWords.Add(reader1.ReadLine());
+                }
+                //Close the reader
+                reader1.Close();
+                _words_b = new string[BossWords.Count];
+                for (int i = 0; i < BossWords.Count; ++i)
+                {
+                    _words_b[i] = BossWords[i].ToUpper();
+                }
+            }
 
             return true;
         }
@@ -110,12 +181,6 @@ internal class playerData
     //how many monsters left to boss
     public int monsterCount;
 
-    //the string of words for this stage. - remember to reload everytime you clear stage.
-    public string[] words_m;
-
-    // the words for the bosses.
-    public string[] words_b;
-
     //the current stage
     public int level;
 
@@ -126,7 +191,4 @@ internal class playerData
 
     //saved BGM(music) volume; Default - 100
     public int sound_BGM; // 0 - 100
-
-    //saved text size; Default - 100 **note: if want to make bigger..need to modify the box.**
-    public int txt_size;
 }

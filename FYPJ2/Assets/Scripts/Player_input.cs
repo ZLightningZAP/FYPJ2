@@ -24,6 +24,7 @@ public class Player_input : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount];
         //setting the required text into char array for easier checking
         char_required = txt_required.text.ToCharArray();
         //the current index of the char array.
@@ -35,7 +36,9 @@ public class Player_input : MonoBehaviour
     {
         //if the word has changed , update the checking sequence.
         if (char_required != txt_required.text.ToCharArray())
+        {
             char_required = txt_required.text.ToCharArray();
+        }
 
         checkKey();
     }
@@ -46,7 +49,7 @@ public class Player_input : MonoBehaviour
         //checking across all alphabet - will convert all to upper case (because keycode), NOTE: if got error - check that the required are all in CAPS
         for (var i = KeyCode.A; i < KeyCode.Z; i++)
         {
-            if (Input.GetKeyDown(i))
+            if (Input.GetKeyDown(i) && char_index < char_required.Length )
             {
                 string crntChar = i.ToString();
                 if (crntChar == char_required[char_index].ToString().ToUpper())
@@ -68,23 +71,56 @@ public class Player_input : MonoBehaviour
             //check if correct
             if (txt_required.text == txt_filled.text)
             {
+                txt_filled.color = Color.green;
+
                 Debug.Log("monster killed");
-                //successful , change monster, drop gold..etc
-                GameControl._control._monsterCount += 1;
-                //if havent reach the minimum monster requirement.
-                if (GameControl._control._monsterCount < 10)
-                    monster_.GetComponent<Image>().sprite = spriteArr_monster[0];
-                else
-                    monster_.GetComponent<Image>().sprite = spriteArr_boss[0];
 
-                //change word required
-                //**NOTE randomize word coming out
-                txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount];
-                char_required = txt_required.text.ToCharArray();
-
-                txt_filled.text = "";
-                char_index = 0;
+                Invoke("NextMonster", 0.2f);
+            }
+            else
+            {
+                txt_filled.color = Color.red;
+                
+                //resets the color back to white after 0.2s
+                Invoke("ResetColor", 0.2f);
             }
         }
+    }
+
+    private void NextMonster()
+    {
+        //successful , change monster, drop gold..etc
+        GameControl._control._monsterCount += 1;
+        //if havent reach the minimum monster requirement.
+        if (GameControl._control._monsterCount < 10)
+        {
+            txt_filled.fontSize = txt_required.fontSize;
+            monster_.GetComponent<Image>().sprite = spriteArr_monster[0];
+            txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount];
+        }
+        else
+        {
+            monster_.GetComponent<Image>().sprite = spriteArr_boss[0];
+            txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount];
+            txt_filled.fontSize = txt_required.cachedTextGenerator.fontSizeUsedForBestFit + 15;
+            if (GameControl._control._monsterCount >= 10)
+            {
+                GameControl._control._monsterCount = 0;
+            }
+        }
+
+        ResetColor();
+
+        //change word required
+        //**NOTE randomize word coming out
+        char_required = txt_required.text.ToCharArray();
+
+        txt_filled.text = "";
+        char_index = 0;
+    }
+
+    private void ResetColor()
+    {
+        txt_filled.color = Color.white;
     }
 }
