@@ -22,7 +22,7 @@ public class Scene_navigation : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
         //Plays the background music
-        //AudioManager.PlayBackgroundMusic(AudioManager.BackgroundMusic.MainMenu);
+        AudioManager.PlayBackgroundMusic(AudioManager.BackgroundMusic.MainMenu);
     }
 
     public void GoTo_Credits()

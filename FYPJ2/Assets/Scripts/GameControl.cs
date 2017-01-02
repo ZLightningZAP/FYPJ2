@@ -38,14 +38,16 @@ public class GameControl : MonoBehaviour
     public string[] _words_m;
     public string[] _words_b;
     public int _level;
-    public int _s_BGM;
-    public int _s_SFX;
+    public float _s_BGM;
+    public float _s_SFX;
 
     private string _filePath = "/playerData.dat";
 
     public void Save()
     {
-        Debug.Log("saving");
+        //Assign all the values for saving
+        _s_SFX = AudioManager.SFXVolume;
+        _s_BGM = AudioManager.BGMVolume;
 
         BinaryFormatter bf_writer = new BinaryFormatter();
         FileStream _file = File.Create(Application.persistentDataPath + _filePath);
@@ -80,6 +82,10 @@ public class GameControl : MonoBehaviour
             _level = data.level;
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
+
+            //Assign the values to the AudioManager
+            AudioManager.SetBGMVolume(_s_BGM);
+            AudioManager.SetEffectVolume(_s_SFX);
             {
                 //**READ THE WORDS TEXT FILE**
                 //Clean the array before loading again
@@ -135,6 +141,10 @@ public class GameControl : MonoBehaviour
             _level = data.level;
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
+
+            //Assign the values to the AudioManager
+            AudioManager.SetBGMVolume(_s_BGM);
+            AudioManager.SetEffectVolume(_s_SFX);
             {
                 //**READ THE WORDS TEXT FILE**
                 //Clean the array before loading again
@@ -190,8 +200,8 @@ internal class playerData
     /*   ====  SETTINGS MODIFIED ====   */
 
     //saved SFX(sound) volume; Default - 100
-    public int sound_SFX; // 0 - 100
+    public float sound_SFX; // 0 - 100
 
     //saved BGM(music) volume; Default - 100
-    public int sound_BGM; // 0 - 100
+    public float sound_BGM; // 0 - 100
 }

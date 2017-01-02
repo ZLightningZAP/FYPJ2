@@ -10,12 +10,7 @@ public class Setting_Sound : MonoBehaviour
     private void Start()
     {
         //Set slider to the max value
-        Slider.value = 100;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
+        Slider.value = GameControl._control._s_SFX * 100;
     }
 
     //Call this function only when the slider value changes = More efficient
