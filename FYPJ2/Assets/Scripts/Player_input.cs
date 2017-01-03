@@ -21,6 +21,8 @@ public class Player_input : MonoBehaviour
     //the sprite images of monsters
     public Sprite[] spriteArr_monster;
 
+    private Canvas canvas;
+
     // Use this for initialization
     private void Start()
     {
@@ -29,6 +31,8 @@ public class Player_input : MonoBehaviour
         char_required = txt_required.text.ToCharArray();
         //the current index of the char array.
         char_index = 0;
+
+        canvas = gameObject.GetComponent<Canvas>();
     }
 
     // Update is called once per frame
@@ -38,6 +42,8 @@ public class Player_input : MonoBehaviour
         if (char_required != txt_required.text.ToCharArray())
         {
             char_required = txt_required.text.ToCharArray();
+            //update the text size
+            txt_filled.fontSize = (int)(((float)txt_required.cachedTextGenerator.fontSizeUsedForBestFit / canvas.scaleFactor) + 1);
         }
 
         checkKey();
@@ -91,23 +97,22 @@ public class Player_input : MonoBehaviour
     {
         //successful , change monster, drop gold..etc
         GameControl._control._monsterCount += 1;
+        if (GameControl._control._monsterCount > 10) //after every boss fight, go back to normal monsters.
+        {
+            GameControl._control._level += 1;
+            GameControl._control._monsterCount = 0;
+        }
         //if havent reach the minimum monster requirement.
         if (GameControl._control._monsterCount < 10)
         {
-            txt_filled.fontSize = txt_required.fontSize;
-            monster_.GetComponent<Image>().sprite = spriteArr_monster[0];
-            txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount];
+            txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount + GameControl._control._level * 10];
         }
         else
         {
-            monster_.GetComponent<Image>().sprite = spriteArr_boss[0];
-            txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount];
-            txt_filled.fontSize = txt_required.cachedTextGenerator.fontSizeUsedForBestFit + 15;
-            if (GameControl._control._monsterCount >= 10)
-            {
-                GameControl._control._monsterCount = 0;
-            }
+            txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount + GameControl._control._level];
         }
+        Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
+        Debug.Log(txt_filled.fontSize);
 
         ResetColor();
 

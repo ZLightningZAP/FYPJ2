@@ -64,6 +64,24 @@ public class AudioManager : MonoBehaviour
     private static AudioSource[] sfxList = new AudioSource[Enum.GetNames(typeof(SoundEffect)).Length];
     private static AudioSource currentBGM;
 
+    public static AudioManager _audioControl;
+
+    private void Awake()
+    {
+        //making it singleton object
+        if (_audioControl == null)
+        {
+            //make object persistant, so wont destroy at all
+            DontDestroyOnLoad(gameObject);
+
+            _audioControl = this;
+        }
+        else if (_audioControl != this) //make sure there are no duplicates, if have destroy the latter
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Use this for initialization
     private void Start()
     {
@@ -74,7 +92,7 @@ public class AudioManager : MonoBehaviour
         }
 
         // SoundManager should be persistent
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         instantiated = true;
 
         // Initialize all the BGMs
@@ -101,6 +119,9 @@ public class AudioManager : MonoBehaviour
         AudioManager.SetBGMVolume(GameControl._control._s_BGM);
         AudioManager.SetEffectVolume(GameControl._control._s_SFX);
     }
+
+    public bool IsInstantiated()
+    { return instantiated; }
 
     // Update is called once per frame
     private void Update()
@@ -133,7 +154,8 @@ public class AudioManager : MonoBehaviour
 
         foreach (AudioSource snd in sfxList)
         {
-            snd.volume = sfxVolume;
+            if (snd != null)
+                snd.volume = sfxVolume;
         }
     }
 
@@ -144,7 +166,8 @@ public class AudioManager : MonoBehaviour
 
         foreach (AudioSource snd in bgmList)
         {
-            snd.volume = bgmVolume;
+            if (snd != null)
+                snd.volume = bgmVolume;
         }
     }
 
