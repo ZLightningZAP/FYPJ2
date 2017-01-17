@@ -53,7 +53,7 @@ public class Player_input : MonoBehaviour
     private void checkKey()
     {
         //checking across all alphabet - will convert all to upper case (because keycode), NOTE: if got error - check that the required are all in CAPS
-        for (var i = KeyCode.A; i < KeyCode.Z; i++)
+        for (var i = KeyCode.A; i <= KeyCode.Z; i++)
         {
             if (Input.GetKeyDown(i) && char_index < char_required.Length)
             {
