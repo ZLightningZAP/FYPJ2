@@ -9,6 +9,8 @@ public class Player_input : MonoBehaviour
     // The correctly inputed string of char - in white
     public Text txt_filled;
 
+    public Boss_AI boss;
+
     private int char_index;
     private char[] char_required;
 
@@ -86,6 +88,7 @@ public class Player_input : MonoBehaviour
 
     private void NextMonster()
     {
+        boss.PlayAnim();
         //successful , change monster, drop gold..etc
         GameControl._control._monsterCount += 1;
         if (GameControl._control._monsterCount > 10) //after every boss fight, go back to normal monsters.

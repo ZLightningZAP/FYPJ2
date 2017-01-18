@@ -18,6 +18,7 @@ public class Boss_AI : MonoBehaviour
     private int i = 0;
     private AnimationClip[] animclip;
     private AnimationClipPlayable clipPlayable;
+    private int previous;
 
     // Use this for initialization
     private void Start()
@@ -27,7 +28,7 @@ public class Boss_AI : MonoBehaviour
         i_healthLeft = i_totalHealth;
 
         ChangeBoss();
-        PlayAnim();
+        previous = -1;
     }
 
     // Update is called once per frame
@@ -50,12 +51,25 @@ public class Boss_AI : MonoBehaviour
     public void ChangeBoss()
     {
         i = Random.Range(0, Boss.Length);
-        spriteRen = Boss[i].GetComponent<SpriteRenderer>();
-        animcontroller = Boss[i].GetComponent<Animator>().runtimeAnimatorController;
+        if (i != previous)
+        {
+            spriteRen = Boss[i].GetComponent<SpriteRenderer>();
+            animcontroller = Boss[i].GetComponent<Animator>().runtimeAnimatorController;
 
-        gameObject.GetComponent<SpriteRenderer>().sprite = spriteRen.sprite;
-        gameObject.GetComponent<Animator>().runtimeAnimatorController = animcontroller;
-        gameObject.GetComponent<Animator>().Stop();
+            gameObject.GetComponent<SpriteRenderer>().sprite = spriteRen.sprite;
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animcontroller;
+            gameObject.GetComponent<Animator>().Stop();
+            previous = i;
+        }
+        else if (i == previous)
+        {
+            ChangeBoss();
+        }
+
+        if (clipPlayable.IsValid() == true)
+        {
+            clipPlayable.Destroy();
+        }
     }
 
     public void PlayAnim()
