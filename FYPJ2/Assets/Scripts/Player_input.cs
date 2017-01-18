@@ -9,17 +9,8 @@ public class Player_input : MonoBehaviour
     // The correctly inputed string of char - in white
     public Text txt_filled;
 
-    // The current monster being dissplayed
-    public Image monster_;
-
     private int char_index;
     private char[] char_required;
-
-    //the sprite images of the Boss monsters
-    public Sprite[] spriteArr_boss;
-
-    //the sprite images of monsters
-    public Sprite[] spriteArr_monster;
 
     private Canvas canvas;
 
@@ -79,7 +70,7 @@ public class Player_input : MonoBehaviour
             {
                 txt_filled.color = Color.green;
 
-                Debug.Log("monster killed");
+                //Debug.Log("monster killed");
 
                 Invoke("NextMonster", 0.2f);
             }
@@ -111,8 +102,8 @@ public class Player_input : MonoBehaviour
         {
             txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount + GameControl._control._level];
         }
-        Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
-        Debug.Log(txt_filled.fontSize);
+        //Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
+        //Debug.Log(txt_filled.fontSize);
 
         ResetColor();
 
