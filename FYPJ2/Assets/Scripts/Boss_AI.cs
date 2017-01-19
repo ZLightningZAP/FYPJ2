@@ -8,16 +8,11 @@ public class Boss_AI : MonoBehaviour
     public Image Boss_timer;
     public Text TextFeedback;
     public float f_totalTime;
-    public int i_totalHealth;
     public float f_timeLeft;
-    public string currentMonster;
 
-    private int i_healthLeft;
     private SpriteRenderer spriteRen;
     private RuntimeAnimatorController animcontroller;
     private int i = 0;
-    private AnimationClip[] animclip;
-    private AnimationClipPlayable clipPlayable;
     private int previous;
 
     // Use this for initialization
@@ -25,7 +20,6 @@ public class Boss_AI : MonoBehaviour
     {
         //Setting the time
         f_timeLeft = f_totalTime;
-        i_healthLeft = i_totalHealth;
 
         ChangeBoss();
         previous = -1;
@@ -58,24 +52,17 @@ public class Boss_AI : MonoBehaviour
 
             gameObject.GetComponent<SpriteRenderer>().sprite = spriteRen.sprite;
             gameObject.GetComponent<Animator>().runtimeAnimatorController = animcontroller;
-            gameObject.GetComponent<Animator>().Stop();
+            gameObject.GetComponent<Animator>().speed = 0;
             previous = i;
         }
         else if (i == previous)
         {
             ChangeBoss();
         }
-
-        if (clipPlayable.IsValid() == true)
-        {
-            clipPlayable.Destroy();
-        }
     }
 
     public void PlayAnim()
     {
-        animclip = gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips;
-        clipPlayable = AnimationClipPlayable.Create(animclip[0]);
-        gameObject.GetComponent<Animator>().Play(clipPlayable);
+        gameObject.GetComponent<Animator>().speed = 1;
     }
 }
