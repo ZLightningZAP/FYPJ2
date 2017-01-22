@@ -9,7 +9,10 @@ public class Player_input : MonoBehaviour
     // The correctly inputed string of char - in white
     public Text txt_filled;
 
-    public Boss_AI boss;
+    public Background_Change background;
+
+    public Boss boss;
+    public NormalMob mob;
 
     private int char_index;
     private char[] char_required;
@@ -26,6 +29,7 @@ public class Player_input : MonoBehaviour
         char_index = 0;
 
         canvas = gameObject.GetComponent<Canvas>();
+        Invoke("NextIsMob", 0f);
     }
 
     // Update is called once per frame
@@ -71,9 +75,6 @@ public class Player_input : MonoBehaviour
             if (txt_required.text == txt_filled.text)
             {
                 txt_filled.color = Color.green;
-
-                //Debug.Log("monster killed");
-
                 Invoke("NextMonster", 0.2f);
             }
             else
@@ -88,11 +89,13 @@ public class Player_input : MonoBehaviour
 
     private void NextMonster()
     {
-        boss.PlayAnim();
+        Invoke("PlayAnim", 0f);
         //successful , change monster, drop gold..etc
         GameControl._control._monsterCount += 1;
         if (GameControl._control._monsterCount > 10) //after every boss fight, go back to normal monsters.
         {
+            //Change BG after every boss fight
+            background.ChangeBG();
             GameControl._control._level += 1;
             GameControl._control._monsterCount = 0;
         }
@@ -100,10 +103,12 @@ public class Player_input : MonoBehaviour
         if (GameControl._control._monsterCount < 10)
         {
             txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount + GameControl._control._level * 10];
+            Invoke("NextIsMob", 1f);
         }
         else
         {
             txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount + GameControl._control._level];
+            Invoke("NextIsBoss", 1f);
         }
         //Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
         //Debug.Log(txt_filled.fontSize);
@@ -121,5 +126,20 @@ public class Player_input : MonoBehaviour
     private void ResetColor()
     {
         txt_filled.color = Color.white;
+    }
+
+    private void NextIsMob()
+    {
+        mob.ChangeMob();
+    }
+
+    private void NextIsBoss()
+    {
+        boss.ChangeBoss();
+    }
+
+    private void PlayAnim()
+    {
+        mob.PlayAnim();
     }
 }

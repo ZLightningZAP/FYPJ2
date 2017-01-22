@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.Director;
 using UnityEngine.UI;
 
-public class Boss_AI : MonoBehaviour
+public class Boss : MonoBehaviour
 {
-    public GameObject[] Boss;
+    public GameObject[] Boss_;
     public Image Boss_timer;
     public Text TextFeedback;
     public float f_totalTime;
-    public float f_timeLeft;
 
+    private float f_timeLeft;
     private SpriteRenderer spriteRen;
     private RuntimeAnimatorController animcontroller;
     private int i = 0;
@@ -20,8 +19,6 @@ public class Boss_AI : MonoBehaviour
     {
         //Setting the time
         f_timeLeft = f_totalTime;
-
-        ChangeBoss();
         previous = -1;
     }
 
@@ -44,11 +41,12 @@ public class Boss_AI : MonoBehaviour
 
     public void ChangeBoss()
     {
-        i = Random.Range(0, Boss.Length);
+        f_timeLeft = f_totalTime;
+        i = Random.Range(0, Boss_.Length);
         if (i != previous)
         {
-            spriteRen = Boss[i].GetComponent<SpriteRenderer>();
-            animcontroller = Boss[i].GetComponent<Animator>().runtimeAnimatorController;
+            spriteRen = Boss_[i].GetComponent<SpriteRenderer>();
+            animcontroller = Boss_[i].GetComponent<Animator>().runtimeAnimatorController;
 
             gameObject.GetComponent<SpriteRenderer>().sprite = spriteRen.sprite;
             gameObject.GetComponent<Animator>().runtimeAnimatorController = animcontroller;
