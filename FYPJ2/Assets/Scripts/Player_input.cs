@@ -13,10 +13,10 @@ public class Player_input : MonoBehaviour
 
     public Boss boss;
     public NormalMob mob;
+    public Player player;
 
     private int char_index;
     private char[] char_required;
-
     private Canvas canvas;
 
     // Use this for initialization
@@ -90,6 +90,7 @@ public class Player_input : MonoBehaviour
     private void NextMonster()
     {
         Invoke("PlayAnim", 0f);
+        Invoke("PlayCharAnim", 0f);
         //successful , change monster, drop gold..etc
         GameControl._control._monsterCount += 1;
         if (GameControl._control._monsterCount > 10) //after every boss fight, go back to normal monsters.
@@ -141,5 +142,10 @@ public class Player_input : MonoBehaviour
     private void PlayAnim()
     {
         mob.PlayAnim();
+    }
+
+    private void PlayCharAnim()
+    {
+        player.PlayAnim();
     }
 }
