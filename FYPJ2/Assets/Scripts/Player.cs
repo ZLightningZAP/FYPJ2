@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    public int Damage { get { return damage; } }
-    public int Level { get { return level; } }
+    // public int Damage { get { return damage; } }
+    // public int Level { get { return level; } }
 
-    private int damage;
-    private int level;
+    //private int damage;
+    // private int level;
     private int i;
+
     private int previous;
 
     //Animation
