@@ -14,6 +14,7 @@ public class Player_input : MonoBehaviour
     public Boss boss;
     public NormalMob mob;
     public Player player;
+    public Currency currency;
 
     private int char_index;
     private char[] char_required;
@@ -76,6 +77,7 @@ public class Player_input : MonoBehaviour
             {
                 txt_filled.color = Color.green;
                 Invoke("NextMonster", 0.2f);
+                //currency.AddCoins(100);
             }
             else
             {
