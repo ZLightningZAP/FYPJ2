@@ -19,10 +19,12 @@ public class Player_input : MonoBehaviour
     private int char_index;
     private char[] char_required;
     private Canvas canvas;
+    private int MoneyMultiplier;
 
     // Use this for initialization
     private void Start()
     {
+        MoneyMultiplier = 1;
         txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount];
         //setting the required text into char array for easier checking
         char_required = txt_required.text.ToCharArray();
@@ -77,7 +79,7 @@ public class Player_input : MonoBehaviour
             {
                 txt_filled.color = Color.green;
                 Invoke("NextMonster", 0.2f);
-                //currency.AddCoins(100);
+                GivingCurrency();
             }
             else
             {
@@ -101,6 +103,7 @@ public class Player_input : MonoBehaviour
             background.ChangeBG();
             GameControl._control._level += 1;
             GameControl._control._monsterCount = 0;
+            MoneyMultiplier += 1;
         }
         //if havent reach the minimum monster requirement.
         if (GameControl._control._monsterCount < 10)
@@ -124,6 +127,18 @@ public class Player_input : MonoBehaviour
 
         txt_filled.text = "";
         char_index = 0;
+    }
+
+    private void GivingCurrency()
+    {
+        if (GameControl._control._monsterCount < 10)
+        {
+            currency.AddCoins(MoneyMultiplier * 1);
+        }
+        else if (GameControl._control._monsterCount == 10)
+        {
+            currency.AddCoins(MoneyMultiplier * 5);
+        }
     }
 
     private void ResetColor()

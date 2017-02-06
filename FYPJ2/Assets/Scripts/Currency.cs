@@ -10,7 +10,7 @@ public class Currency : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        coin = 10;
+        coin = 0;
         text = GetComponent<Text>();
     }
 
