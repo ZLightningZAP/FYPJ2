@@ -103,7 +103,7 @@ public class Player_input : MonoBehaviour
             background.ChangeBG();
             GameControl._control._level += 1;
             GameControl._control._monsterCount = 0;
-            MoneyMultiplier += 1;
+            MoneyMultiplier += 2;
         }
         //if havent reach the minimum monster requirement.
         if (GameControl._control._monsterCount < 10)

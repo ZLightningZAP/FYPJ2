@@ -12,6 +12,7 @@ public abstract class Ally_Base_Class : MonoBehaviour
     public Text Button_text;
     public Button Button_button;
     public Text Level_text;
+    public Text Upgrade_text;
 
     //public Button Upgrade;
 
@@ -19,7 +20,7 @@ public abstract class Ally_Base_Class : MonoBehaviour
     public bool IsUnlocked { get { return isunlocked; } set { IsUnlocked = value; } }
 
     public int Level { get { return level; } set { level = value; } }
-    public int UpgradeCost { get { return upgradecost; } }
+    public int UpgradeCost { get { return upgradecost; } set { upgradecost = value; } }
     public int Damage { get { return damage; } set { damage = value; } }
 
     // Use this for initialization

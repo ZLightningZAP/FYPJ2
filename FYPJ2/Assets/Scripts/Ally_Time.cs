@@ -2,13 +2,17 @@
 
 public class Ally_Time : Ally_Base_Class
 {
+    public int UpgradeMultiplier;
     private Boss boss;
+    private Currency currency;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
         boss = (Boss)FindObjectOfType(typeof(Boss));
+        currency = (Currency)FindObjectOfType(typeof(Currency));
+        UpgradeCost = 1;
     }
 
     // Update is called once per frame
@@ -27,7 +31,9 @@ public class Ally_Time : Ally_Base_Class
         }
 
         //update the text on the level
-        Level_text.text = "level " + Level.ToString();
+        Level_text.text = "Level " + Level.ToString();
+        //update the cost of the next upgrade
+        Upgrade_text.text = "Cost " + UpgradeCost.ToString();
     }
 
     //If ally is unlocked
@@ -56,13 +62,19 @@ public class Ally_Time : Ally_Base_Class
         //If ally has been unlocked and can be upgraded
         if (Button_text.text == "Upgrade Ally")
         {
-            Level += 1;
-            Upgrade();
+            if (currency.GetCoins() >= UpgradeCost)
+            {
+                currency.MinusCoins(UpgradeCost);
+                Level += 1;
+                Upgrade();
+            }
         }
     }
 
     private void Upgrade()
     {
+        UpgradeCost = UpgradeCost * UpgradeMultiplier;
+        //Add total time depending on how many level is the ally
         if (Level == 1)
         {
             boss.f_totalTime += 0.3f;
