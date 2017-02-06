@@ -55,8 +55,14 @@ public class Ally_Time : Ally_Base_Class
         //If ally hasnt been unlocked yet
         if (Button_text.text == "Unlock Ally")
         {
-            UnlockedYes();
-            isunlocked = true;
+            if (currency.GetCoins() >= UpgradeCost)
+            {
+                currency.MinusCoins(UpgradeCost);
+                UnlockedYes();
+                Level += 1;
+                Upgrade();
+                isunlocked = true;
+            }
         }
 
         //If ally has been unlocked and can be upgraded
