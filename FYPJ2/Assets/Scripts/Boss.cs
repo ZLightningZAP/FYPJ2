@@ -11,6 +11,8 @@ public class Boss : MonoBehaviour
     private float f_timeLeft;
     private int i = 0;
     private int previous;
+    private SpriteRenderer spriteRen;
+    private RuntimeAnimatorController animcontroller;
 
     // Use this for initialization
     private void Start()
@@ -43,6 +45,11 @@ public class Boss : MonoBehaviour
         i = Random.Range(0, Boss_.Length);
         if (i != previous)
         {
+            spriteRen = Boss_[i].GetComponent<SpriteRenderer>();
+            animcontroller = Boss_[i].GetComponent<Animator>().runtimeAnimatorController;
+
+            gameObject.GetComponent<SpriteRenderer>().sprite = spriteRen.sprite;
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animcontroller;
             gameObject.GetComponent<Animator>().speed = 0;
             previous = i;
         }

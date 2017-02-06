@@ -2,10 +2,13 @@
 
 public class Ally_Time : Ally_Base_Class
 {
+    private Boss boss;
+
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
+        boss = (Boss)FindObjectOfType(typeof(Boss));
     }
 
     // Update is called once per frame
@@ -34,10 +37,6 @@ public class Ally_Time : Ally_Base_Class
         gameObject.SetActive(true);
     }
 
-    private void Upgrading()
-    {
-    }
-
     //If ally is not unlocked
     private void UnlockedNo()
     {
@@ -58,6 +57,19 @@ public class Ally_Time : Ally_Base_Class
         if (Button_text.text == "Upgrade Ally")
         {
             Level += 1;
+            Upgrade();
+        }
+    }
+
+    private void Upgrade()
+    {
+        if (Level == 1)
+        {
+            boss.f_totalTime += 0.3f;
+        }
+        else if (Level % 5 == 0)
+        {
+            boss.f_totalTime += 0.3f;
         }
     }
 }
