@@ -34,6 +34,7 @@ public class NormalMob : MonoBehaviour
         else if (i == previous)
         {
             ChangeMob();
+            GameControl._control._monsterCount += 1;
         }
     }
 

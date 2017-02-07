@@ -56,6 +56,7 @@ public class Boss : MonoBehaviour
         else if (i == previous)
         {
             ChangeBoss();
+            GameControl._control._monsterCount += 1;
         }
     }
 
