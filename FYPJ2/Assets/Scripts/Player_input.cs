@@ -9,6 +9,9 @@ public class Player_input : MonoBehaviour
     // The correctly inputed string of char - in white
     public Text txt_filled;
 
+    //Text for displaying the current level
+    public Text txt_Level;
+
     public Background_Change background;
 
     public Boss boss;
@@ -46,6 +49,7 @@ public class Player_input : MonoBehaviour
             txt_filled.fontSize = (int)(((float)txt_required.cachedTextGenerator.fontSizeUsedForBestFit / canvas.scaleFactor) + 1);
         }
 
+        txt_Level.text = "Level " + GameControl._control._level.ToString() + "." + GameControl._control._monsterCount.ToString();
         checkKey();
     }
 

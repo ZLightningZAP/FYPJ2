@@ -40,6 +40,7 @@ public class GameControl : MonoBehaviour
     public int _level;
     public float _s_BGM;
     public float _s_SFX;
+    public int _coins;
 
     private string _filePath = "/playerData.dat";
 
@@ -59,6 +60,7 @@ public class GameControl : MonoBehaviour
             data.level = _level;
             data.sound_BGM = _s_BGM;
             data.sound_SFX = _s_SFX;
+            data.coins = _coins;
         }
 
         //writing it to that file path
@@ -82,6 +84,7 @@ public class GameControl : MonoBehaviour
             _level = data.level;
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
+            _coins = data.coins;
 
             if (AudioManager._audioControl != null)
             {
@@ -144,6 +147,7 @@ public class GameControl : MonoBehaviour
             _level = data.level;
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
+            _coins = data.coins;
 
             {
                 //**READ THE WORDS TEXT FILE**
@@ -196,6 +200,9 @@ internal class playerData
 
     //the current stage
     public int level;
+
+    //the current amount of oins
+    public int coins;
 
     /*   ====  SETTINGS MODIFIED ====   */
 

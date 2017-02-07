@@ -3,35 +3,32 @@ using UnityEngine.UI;
 
 public class Currency : MonoBehaviour
 {
-    private int coin;
-
     private Text text;
 
     // Use this for initialization
     private void Start()
     {
-        coin = 0;
         text = GetComponent<Text>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        text.text = "Coins " + coin.ToString();
+        text.text = "Coins " + GameControl._control._coins.ToString();
     }
 
     public int GetCoins()
     {
-        return coin;
+        return GameControl._control._coins;
     }
 
     public void AddCoins(int amount)
     {
-        coin = coin + amount;
+        GameControl._control._coins = GameControl._control._coins + amount;
     }
 
     public void MinusCoins(int amount)
     {
-        coin = coin - amount;
+        GameControl._control._coins = GameControl._control._coins - amount;
     }
 }
