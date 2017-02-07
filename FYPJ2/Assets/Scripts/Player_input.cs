@@ -23,6 +23,8 @@ public class Player_input : MonoBehaviour
     private char[] char_required;
     private Canvas canvas;
 
+    private bool spamEnterGuard;
+
     // Use this for initialization
     private void Start()
     {
@@ -35,6 +37,7 @@ public class Player_input : MonoBehaviour
         char_required = txt_required.text.ToCharArray();
         //the current index of the char array.
         char_index = 0;
+        spamEnterGuard = false;
 
         canvas = gameObject.GetComponent<Canvas>();
         Invoke("NextIsMob", 0f);
@@ -78,8 +81,9 @@ public class Player_input : MonoBehaviour
         }
 
         //when enter key is pressed
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && !spamEnterGuard)
         {
+            spamEnterGuard = true;
             //check if correct
             if (txt_required.text == txt_filled.text)
             {
@@ -150,15 +154,18 @@ public class Player_input : MonoBehaviour
     private void ResetColor()
     {
         txt_filled.color = Color.white;
+        spamEnterGuard = false;
     }
 
     private void NextIsMob()
     {
+        spamEnterGuard = false;
         mob.ChangeMob();
     }
 
     private void NextIsBoss()
     {
+        spamEnterGuard = false;
         boss.ChangeBoss();
     }
 
