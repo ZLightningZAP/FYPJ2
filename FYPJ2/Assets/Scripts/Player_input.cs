@@ -159,14 +159,19 @@ public class Player_input : MonoBehaviour
 
     private void NextIsMob()
     {
-        spamEnterGuard = false;
+        Invoke("AllowEnterKey", 0.5f);
         mob.ChangeMob();
     }
 
     private void NextIsBoss()
     {
-        spamEnterGuard = false;
+        Invoke("AllowEnterKey", 0.5f);
         boss.ChangeBoss();
+    }
+
+    private void AllowEnterKey()
+    {
+        spamEnterGuard = false;
     }
 
     private void PlayAnim()
