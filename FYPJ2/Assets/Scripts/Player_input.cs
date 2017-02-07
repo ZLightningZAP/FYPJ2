@@ -23,7 +23,7 @@ public class Player_input : MonoBehaviour
     private char[] char_required;
     private Canvas canvas;
 
-    private bool spamEnterGuard;
+    private static bool spamEnterGuard;
 
     // Use this for initialization
     private void Start()
@@ -84,6 +84,7 @@ public class Player_input : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) && !spamEnterGuard)
         {
             spamEnterGuard = true;
+
             //check if correct
             if (txt_required.text == txt_filled.text)
             {
@@ -159,19 +160,12 @@ public class Player_input : MonoBehaviour
 
     private void NextIsMob()
     {
-        Invoke("AllowEnterKey", 0.5f);
         mob.ChangeMob();
     }
 
     private void NextIsBoss()
     {
-        Invoke("AllowEnterKey", 0.5f);
         boss.ChangeBoss();
-    }
-
-    private void AllowEnterKey()
-    {
-        spamEnterGuard = false;
     }
 
     private void PlayAnim()
