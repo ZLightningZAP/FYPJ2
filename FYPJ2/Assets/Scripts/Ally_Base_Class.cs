@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public abstract class Ally_Base_Class : MonoBehaviour
 {
     public int level;
-    public int upgradecost;
     public int damage;
     public Text Button_text;
     public Button Button_button;
@@ -16,7 +15,6 @@ public abstract class Ally_Base_Class : MonoBehaviour
     //Getter functions
     public int Level { get { return level; } set { level = value; } }
 
-    public int UpgradeCost { get { return upgradecost; } set { upgradecost = value; } }
     public int Damage { get { return damage; } set { damage = value; } }
 
     // Use this for initialization

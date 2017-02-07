@@ -16,7 +16,7 @@ public class Ally_Time : Ally_Base_Class
         {
             GameControl._control._ally1Cost = 1;
         }
-        UpgradeCost = 1 * GameControl._control._ally1Cost;
+        GameControl._control._ally1Cost = 1 * GameControl._control._ally1Cost;
     }
 
     // Update is called once per frame
@@ -59,9 +59,9 @@ public class Ally_Time : Ally_Base_Class
         //If ally hasnt been unlocked yet
         if (GameControl._control._ally1Level == 0)
         {
-            if (currency.GetCoins() >= UpgradeCost)
+            if (currency.GetCoins() >= GameControl._control._ally1Cost)
             {
-                currency.MinusCoins(UpgradeCost);
+                currency.MinusCoins(GameControl._control._ally1Cost);
                 UnlockedYes();
                 GameControl._control._ally1Level += 1;
                 Upgrade();
@@ -71,9 +71,9 @@ public class Ally_Time : Ally_Base_Class
         //If ally has been unlocked and can be upgraded
         if (GameControl._control._ally1Level >= 1)
         {
-            if (currency.GetCoins() >= UpgradeCost)
+            if (currency.GetCoins() >= GameControl._control._ally1Cost)
             {
-                currency.MinusCoins(UpgradeCost);
+                currency.MinusCoins(GameControl._control._ally1Cost);
                 GameControl._control._ally1Level += 1;
                 Upgrade();
             }

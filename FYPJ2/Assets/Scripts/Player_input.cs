@@ -85,7 +85,7 @@ public class Player_input : MonoBehaviour
             {
                 txt_filled.color = Color.green;
                 GivingCurrency();
-                Invoke("NextMonster", 0f);
+                Invoke("NextMonster", 0.2f);
             }
             else
             {
