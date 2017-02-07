@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: 49cd8760cc782fd438b058f6f83cfca0
-timeCreated: 1485004426
+guid: 6a7aafa8302043c4798554689f57b0f8
+timeCreated: 1486480136
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: spritesheet_mc_attack(1435_1687)_0
-    21300002: spritesheet_mc_attack(1435_1687)_1
-    21300004: spritesheet_mc_attack(1435_1687)_2
+    21300000: spritesheet_mc_attack3(1442_1535)1_0
+    21300002: spritesheet_mc_attack3(1442_1535)1_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -73,39 +72,26 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet_mc_attack(1435_1687)_0
+      name: spritesheet_mc_attack3(1442_1535)1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1435
-        height: 1687
+        width: 1442
+        height: 1535
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet_mc_attack(1435_1687)_1
+      name: spritesheet_mc_attack3(1442_1535)1_1
       rect:
         serializedVersion: 2
-        x: 1435
+        x: 1442
         y: 0
-        width: 1435
-        height: 1687
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: spritesheet_mc_attack(1435_1687)_2
-      rect:
-        serializedVersion: 2
-        x: 2870
-        y: 0
-        width: 1435
-        height: 1687
+        width: 1442
+        height: 1535
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
