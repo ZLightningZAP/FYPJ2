@@ -6,7 +6,6 @@ public class Boss : MonoBehaviour
     public GameObject[] Boss_;
     public Image Boss_timer;
     public Text TextFeedback;
-    public float f_totalTime;
 
     private float f_timeLeft;
     private int i = 0;
@@ -17,8 +16,12 @@ public class Boss : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        //Setting the time
-        f_timeLeft = f_totalTime;
+        if (GameControl._control._bossTotalTime <= 10)
+        {
+            GameControl._control._bossTotalTime = 10;
+        }
+
+        f_timeLeft = GameControl._control._bossTotalTime;
         previous = -1;
     }
 
@@ -34,14 +37,14 @@ public class Boss : MonoBehaviour
         {
             f_timeLeft -= Time.deltaTime;
 
-            Boss_timer.fillAmount = f_timeLeft / f_totalTime;
+            Boss_timer.fillAmount = f_timeLeft / GameControl._control._bossTotalTime;
             TextFeedback.text = f_timeLeft.ToString().Substring(0, 4);
         }
     }
 
     public void ChangeBoss()
     {
-        f_timeLeft = f_totalTime;
+        f_timeLeft = GameControl._control._bossTotalTime;
         i = Random.Range(0, Boss_.Length);
         if (i != previous)
         {

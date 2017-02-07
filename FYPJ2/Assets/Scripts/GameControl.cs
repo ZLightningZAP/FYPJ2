@@ -41,6 +41,10 @@ public class GameControl : MonoBehaviour
     public float _s_BGM;
     public float _s_SFX;
     public int _coins;
+    public float _bossTotalTime;
+    public int _coinMultiplier;
+    public int _ally1Level;
+    public int _ally1Cost;
 
     private string _filePath = "/playerData.dat";
 
@@ -61,6 +65,10 @@ public class GameControl : MonoBehaviour
             data.sound_BGM = _s_BGM;
             data.sound_SFX = _s_SFX;
             data.coins = _coins;
+            data.bossTotalTime = _bossTotalTime;
+            data.coinMultiplier = _coinMultiplier;
+            data.ally1Level = _ally1Level;
+            data.ally1Cost = _ally1Cost;
         }
 
         //writing it to that file path
@@ -85,6 +93,10 @@ public class GameControl : MonoBehaviour
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
             _coins = data.coins;
+            _bossTotalTime = data.bossTotalTime;
+            _coinMultiplier = data.coinMultiplier;
+            _ally1Level = data.ally1Level;
+            _ally1Cost = data.ally1Cost;
 
             if (AudioManager._audioControl != null)
             {
@@ -148,6 +160,10 @@ public class GameControl : MonoBehaviour
             _s_BGM = data.sound_BGM;
             _s_SFX = data.sound_SFX;
             _coins = data.coins;
+            _bossTotalTime = data.bossTotalTime;
+            _coinMultiplier = data.coinMultiplier;
+            _ally1Level = data.ally1Level;
+            _ally1Cost = data.ally1Cost;
 
             {
                 //**READ THE WORDS TEXT FILE**
@@ -201,8 +217,15 @@ internal class playerData
     //the current stage
     public int level;
 
-    //the current amount of oins
+    //the current amount of coins
     public int coins;
+
+    //the boss time
+    public float bossTotalTime;
+
+    public int coinMultiplier;
+    public int ally1Level;
+    public int ally1Cost;
 
     /*   ====  SETTINGS MODIFIED ====   */
 

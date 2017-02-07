@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public abstract class Ally_Base_Class : MonoBehaviour
 {
-    //Ally base variables
-    public bool isunlocked;
-
     public int level;
     public int upgradecost;
     public int damage;
@@ -17,9 +14,8 @@ public abstract class Ally_Base_Class : MonoBehaviour
     //public Button Upgrade;
 
     //Getter functions
-    public bool IsUnlocked { get { return isunlocked; } set { IsUnlocked = value; } }
-
     public int Level { get { return level; } set { level = value; } }
+
     public int UpgradeCost { get { return upgradecost; } set { upgradecost = value; } }
     public int Damage { get { return damage; } set { damage = value; } }
 

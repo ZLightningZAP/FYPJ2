@@ -12,7 +12,11 @@ public class Ally_Time : Ally_Base_Class
         base.Start();
         boss = (Boss)FindObjectOfType(typeof(Boss));
         currency = (Currency)FindObjectOfType(typeof(Currency));
-        UpgradeCost = 1;
+        if (GameControl._control._ally1Cost == 0)
+        {
+            GameControl._control._ally1Cost = 1;
+        }
+        UpgradeCost = 1 * GameControl._control._ally1Cost;
     }
 
     // Update is called once per frame
@@ -21,7 +25,7 @@ public class Ally_Time : Ally_Base_Class
         base.Update();
 
         //Check if the character is unlocked
-        if (IsUnlocked == true)
+        if (GameControl._control._ally1Level >= 1)
         {
             UnlockedYes();
         }
@@ -31,9 +35,9 @@ public class Ally_Time : Ally_Base_Class
         }
 
         //update the text on the level
-        Level_text.text = "Level " + Level.ToString();
+        Level_text.text = "Level " + GameControl._control._ally1Level.ToString();
         //update the cost of the next upgrade
-        Upgrade_text.text = "Cost " + UpgradeCost.ToString();
+        Upgrade_text.text = "Cost " + GameControl._control._ally1Cost.ToString();
     }
 
     //If ally is unlocked
@@ -53,25 +57,24 @@ public class Ally_Time : Ally_Base_Class
     public void OnButtonClick()
     {
         //If ally hasnt been unlocked yet
-        if (Button_text.text == "Unlock Ally")
+        if (GameControl._control._ally1Level == 0)
         {
             if (currency.GetCoins() >= UpgradeCost)
             {
                 currency.MinusCoins(UpgradeCost);
                 UnlockedYes();
-                Level += 1;
+                GameControl._control._ally1Level += 1;
                 Upgrade();
-                isunlocked = true;
             }
         }
 
         //If ally has been unlocked and can be upgraded
-        if (Button_text.text == "Upgrade Ally")
+        if (GameControl._control._ally1Level >= 1)
         {
             if (currency.GetCoins() >= UpgradeCost)
             {
                 currency.MinusCoins(UpgradeCost);
-                Level += 1;
+                GameControl._control._ally1Level += 1;
                 Upgrade();
             }
         }
@@ -79,15 +82,15 @@ public class Ally_Time : Ally_Base_Class
 
     private void Upgrade()
     {
-        UpgradeCost = UpgradeCost * UpgradeMultiplier;
+        GameControl._control._ally1Cost = GameControl._control._ally1Cost * UpgradeMultiplier;
         //Add total time depending on how many level is the ally
         if (Level == 1)
         {
-            boss.f_totalTime += 0.3f;
+            GameControl._control._bossTotalTime += 0.3f;
         }
         else if (Level % 5 == 0)
         {
-            boss.f_totalTime += 0.3f;
+            GameControl._control._bossTotalTime += 0.3f;
         }
     }
 }
