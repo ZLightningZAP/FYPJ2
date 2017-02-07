@@ -3,14 +3,12 @@
 public class Ally_Time : Ally_Base_Class
 {
     public int UpgradeMultiplier;
-    private Boss boss;
     private Currency currency;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
-        boss = (Boss)FindObjectOfType(typeof(Boss));
         currency = (Currency)FindObjectOfType(typeof(Currency));
         if (GameControl._control._ally1Cost == 0)
         {
