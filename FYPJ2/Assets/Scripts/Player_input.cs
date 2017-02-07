@@ -119,12 +119,12 @@ public class Player_input : MonoBehaviour
         if (GameControl._control._monsterCount < 10)
         {
             txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount + GameControl._control._level * 10];
-            Invoke("NextIsMob", 1f);
+            Invoke("NextIsMob", 0f);
         }
         else
         {
             txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount + GameControl._control._level];
-            Invoke("NextIsBoss", 1f);
+            Invoke("NextIsBoss", 0f);
         }
         //Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
         //Debug.Log(txt_filled.fontSize);
