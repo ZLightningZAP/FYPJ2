@@ -111,8 +111,8 @@ public class Player_input : MonoBehaviour
 
     private void NextMonster()
     {
-        PlayAnim();
-        PlayCharAnim();
+        Invoke("PlayAnim", 0f);
+        Invoke("PlayCharAnim", 0f);
         //successful , change monster, drop gold..etc
         GameControl._control._monsterCount += 1;
         if (GameControl._control._monsterCount > 10) //after every boss fight, go back to normal monsters.
@@ -127,12 +127,12 @@ public class Player_input : MonoBehaviour
         if (GameControl._control._monsterCount < 10)
         {
             txt_required.text = GameControl._control._words_m[Random.Range(0, GameControl._control._words_m.Length - 1)];
-            NextIsMob();
+            Invoke("NextIsMob", 1f);
         }
         else
         {
             txt_required.text = GameControl._control._words_b[Random.Range(0, GameControl._control._words_b.Length - 1)];
-            NextIsBoss();
+            Invoke("NextIsBoss", 1f);
         }
         //Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
         //Debug.Log(txt_filled.fontSize);
