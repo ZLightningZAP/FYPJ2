@@ -25,6 +25,9 @@ public class Player_input : MonoBehaviour
 
     private static bool spamEnterGuard;
 
+    public Image Boss_timer;
+    public Text TextFeedback;
+
     // Use this for initialization
     private void Start()
     {
@@ -58,6 +61,12 @@ public class Player_input : MonoBehaviour
             char_required = txt_required.text.ToCharArray();
             //update the text size
             txt_filled.fontSize = (int)(((float)txt_required.cachedTextGenerator.fontSizeUsedForBestFit / canvas.scaleFactor) + 1);
+        }
+
+        if (boss.f_timeLeft < 0.0f)
+        {
+            Boss_timer.fillAmount = 0;
+            TextFeedback.text = "";
         }
 
         txt_Level.text = "Level " + GameControl._control._level.ToString() + "." + GameControl._control._monsterCount.ToString();
@@ -163,6 +172,8 @@ public class Player_input : MonoBehaviour
     private void ResetColor()
     {
         txt_filled.color = Color.white;
+        txt_filled.text = "";
+        char_index = 0;
         spamEnterGuard = false;
     }
 

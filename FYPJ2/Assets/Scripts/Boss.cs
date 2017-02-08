@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
     public Image Boss_timer;
     public Text TextFeedback;
 
-    private float f_timeLeft;
+    public float f_timeLeft;
     private int i = 0;
     private int previous;
     private SpriteRenderer spriteRen;
@@ -37,6 +37,12 @@ public class Boss : MonoBehaviour
             Boss_timer.fillAmount = 0;
             TextFeedback.text = "";
             GoBack = true;
+        }
+
+        if (f_timeLeft < 0.0f)
+        {
+            Boss_timer.fillAmount = 0;
+            TextFeedback.text = "";
         }
 
         if (GameControl._control._monsterCount < 10)
