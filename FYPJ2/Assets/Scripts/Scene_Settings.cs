@@ -27,6 +27,7 @@ public class Scene_Settings : MonoBehaviour
         GameControl._control._ally1Cost = 0;
         GameControl._control._coinMultiplier = 1;
         GameControl._control._monsterCount = 0;
+        GameControl._control._bossTotalTime = 10;
 
         GameControl._control.Save();
     }

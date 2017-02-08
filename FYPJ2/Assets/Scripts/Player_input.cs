@@ -48,7 +48,8 @@ public class Player_input : MonoBehaviour
     {
         if (boss.GoBack)
         {
-            Invoke("NextMonster", 0.2f);
+            GameControl._control._monsterCount = 8;
+            NextMonster();
             boss.GoBack = false;
         }
         //if the word has changed , update the checking sequence.
@@ -110,8 +111,8 @@ public class Player_input : MonoBehaviour
 
     private void NextMonster()
     {
-        Invoke("PlayAnim", 0f);
-        Invoke("PlayCharAnim", 0f);
+        PlayAnim();
+        PlayCharAnim();
         //successful , change monster, drop gold..etc
         GameControl._control._monsterCount += 1;
         if (GameControl._control._monsterCount > 10) //after every boss fight, go back to normal monsters.
@@ -126,12 +127,12 @@ public class Player_input : MonoBehaviour
         if (GameControl._control._monsterCount < 10)
         {
             txt_required.text = GameControl._control._words_m[Random.Range(0, GameControl._control._words_m.Length - 1)];
-            Invoke("NextIsMob", 0f);
+            NextIsMob();
         }
         else
         {
             txt_required.text = GameControl._control._words_b[Random.Range(0, GameControl._control._words_b.Length - 1)];
-            Invoke("NextIsBoss", 0f);
+            NextIsBoss();
         }
         //Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
         //Debug.Log(txt_filled.fontSize);

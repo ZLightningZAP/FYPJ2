@@ -33,8 +33,9 @@ public class Boss : MonoBehaviour
     {
         if (f_timeLeft <= 0.1f && f_timeLeft >= -0.9f)
         {
-            f_timeLeft = 100;
-            GameControl._control._monsterCount -= 2; //is -2 to counter the +1 in the NextMonster fucnt in Player_input.cs
+            f_timeLeft = -1; //is -2 to counter the +1 in the NextMonster fucnt in Player_input.cs
+            Boss_timer.fillAmount = 0;
+            TextFeedback.text = "";
             GoBack = true;
         }
 
