@@ -14,6 +14,11 @@ public class Scene_Settings : MonoBehaviour
     {
     }
 
+    public void PlayButtonPress()
+    {
+        AudioManager.PlaySoundEffect(AudioManager.SoundEffect.MouseClick);
+    }
+
     public void ResetPlayerData()
     {
         GameControl._control._coins = 0;

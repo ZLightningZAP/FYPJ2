@@ -13,9 +13,12 @@ public class Boss : MonoBehaviour
     private SpriteRenderer spriteRen;
     private RuntimeAnimatorController animcontroller;
 
+    public bool GoBack;
+
     // Use this for initialization
     private void Start()
     {
+        GoBack = false;
         if (GameControl._control._bossTotalTime <= 10)
         {
             GameControl._control._bossTotalTime = 10;
@@ -28,6 +31,13 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (f_timeLeft <= 0.1f && f_timeLeft >= -0.9f)
+        {
+            f_timeLeft = 100;
+            GameControl._control._monsterCount -= 2; //is -2 to counter the +1 in the NextMonster fucnt in Player_input.cs
+            GoBack = true;
+        }
+
         if (GameControl._control._monsterCount < 10)
         {
             Boss_timer.fillAmount = 0;

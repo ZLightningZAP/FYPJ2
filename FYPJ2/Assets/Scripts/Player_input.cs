@@ -46,6 +46,11 @@ public class Player_input : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (boss.GoBack)
+        {
+            Invoke("NextMonster", 0.2f);
+            boss.GoBack = false;
+        }
         //if the word has changed , update the checking sequence.
         if (char_required != txt_required.text.ToCharArray())
         {
@@ -89,13 +94,14 @@ public class Player_input : MonoBehaviour
             if (txt_required.text == txt_filled.text)
             {
                 txt_filled.color = Color.green;
+                AudioManager.PlaySoundEffect(AudioManager.SoundEffect.CorrectFeedback);
                 GivingCurrency();
                 Invoke("NextMonster", 0.2f);
             }
             else
             {
                 txt_filled.color = Color.red;
-
+                AudioManager.PlaySoundEffect(AudioManager.SoundEffect.WrongFeedback);
                 //resets the color back to white after 0.2s
                 Invoke("ResetColor", 0.2f);
             }
@@ -119,12 +125,12 @@ public class Player_input : MonoBehaviour
         //if havent reach the minimum monster requirement.
         if (GameControl._control._monsterCount < 10)
         {
-            txt_required.text = GameControl._control._words_m[GameControl._control._monsterCount + GameControl._control._level * 10];
+            txt_required.text = GameControl._control._words_m[Random.Range(0, GameControl._control._words_m.Length - 1)];
             Invoke("NextIsMob", 0f);
         }
         else
         {
-            txt_required.text = GameControl._control._words_b[GameControl._control._monsterCount + GameControl._control._level];
+            txt_required.text = GameControl._control._words_b[Random.Range(0, GameControl._control._words_b.Length - 1)];
             Invoke("NextIsBoss", 0f);
         }
         //Debug.Log(txt_required.cachedTextGenerator.fontSizeUsedForBestFit);
@@ -136,6 +142,7 @@ public class Player_input : MonoBehaviour
         //**NOTE randomize word coming out
         char_required = txt_required.text.ToCharArray();
 
+        AudioManager.PlaySoundEffect(AudioManager.SoundEffect.MonsterDie);
         txt_filled.text = "";
         char_index = 0;
     }

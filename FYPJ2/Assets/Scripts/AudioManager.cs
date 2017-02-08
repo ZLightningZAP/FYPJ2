@@ -12,10 +12,10 @@ public class AudioManager : MonoBehaviour
     public enum SoundEffect
     {
         MouseClick,
-        Attack,
-        Coins,
-        LevelUp,
-        UnlockAlly,
+        CorrectFeedback,
+        WrongFeedback,
+        LevelupAlly,
+        MonsterDie,
     }
 
     // For initializing sounds

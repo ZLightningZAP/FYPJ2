@@ -14,4 +14,9 @@ public class Scene_MainMenu : MonoBehaviour
     private void Update()
     {
     }
+
+    public void playButtonPress()
+    {
+        AudioManager.PlaySoundEffect(AudioManager.SoundEffect.MouseClick);
+    }
 }
